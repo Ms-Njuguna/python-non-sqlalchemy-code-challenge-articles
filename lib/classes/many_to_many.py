@@ -52,7 +52,9 @@ class Magazine:
     def __setattr__(self, key, value):
         if key == "name":
             if not isinstance(value, str):
-                return    
+                return 
+            if not 2 <= len(value) <= 16:
+                return  
         super().__setattr__(key, value)
 
     def articles(self):
