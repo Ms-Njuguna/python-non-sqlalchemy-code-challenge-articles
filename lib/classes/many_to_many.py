@@ -38,7 +38,7 @@ class Author:
         return Article(self, magazine, title)
     
     def topic_areas(self):
-        pass
+        return list({article.magazine.category for article in self.articles()})
 
 class Magazine:
     def __init__(self, name, category):
