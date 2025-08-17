@@ -49,6 +49,12 @@ class Magazine:
         self.name = name
         self.category = category
 
+    def __setattr__(self, key, value):
+        if key == "name":
+            if not isinstance(value, str):
+                return    
+        super().__setattr__(key, value)
+
     def articles(self):
         return [article for article in Article.all if article.magazine == self]
 
