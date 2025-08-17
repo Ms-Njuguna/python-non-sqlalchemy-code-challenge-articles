@@ -20,6 +20,14 @@ class Author:
     def __init__(self, name):
         self.name = name
 
+    def __setattr__(self, key, value):
+        if key == "name":
+            if not isinstance(value, str):
+                return  
+            if hasattr(self, "name"):
+                return  
+        super().__setattr__(key, value)
+
     def articles(self):
         pass
 
