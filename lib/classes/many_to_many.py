@@ -50,7 +50,7 @@ class Magazine:
         self.category = category
 
     def __setattr__(self, key, value):
-        if key == "name":
+        if key == "name" or key == 'category':
             if not isinstance(value, str):
                 return 
             if not 2 <= len(value) <= 16:
