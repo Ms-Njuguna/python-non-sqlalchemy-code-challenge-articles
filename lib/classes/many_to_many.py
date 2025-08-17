@@ -38,7 +38,11 @@ class Author:
         return Article(self, magazine, title)
     
     def topic_areas(self):
-        return list({article.magazine.category for article in self.articles()})
+        categories = {article.magazine.category for article in self.articles()}
+        if categories:
+           return list(categories)
+        else:
+            return None
 
 class Magazine:
     def __init__(self, name, category):
