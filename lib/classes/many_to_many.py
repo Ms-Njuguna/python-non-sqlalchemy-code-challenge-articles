@@ -32,7 +32,7 @@ class Author:
         return [article for article in Article.all if article.author == self]
 
     def magazines(self):
-        pass
+        return list({article.magazine for article in self.articles()})
 
     def add_article(self, magazine, title):
         pass
@@ -41,9 +41,12 @@ class Author:
         pass
 
 class Magazine:
+    all = []
     def __init__(self, name, category):
         self.name = name
         self.category = category
+
+        Magazine.all.append(self)
 
     def articles(self):
         pass
