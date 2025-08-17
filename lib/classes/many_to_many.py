@@ -1,8 +1,20 @@
 class Article:
+    all = []
     def __init__(self, author, magazine, title):
         self.author = author
         self.magazine = magazine
         self.title = title
+
+        Article.all.append(self)
+
+    def __setattr__(self, key, value):
+        if key == "title":
+            if not isinstance(value, str):
+                return  
+            if hasattr(self, "title"):
+                return  
+        super().__setattr__(key, value)
+        
         
 class Author:
     def __init__(self, name):
