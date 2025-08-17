@@ -45,9 +45,13 @@ class Author:
             return None
 
 class Magazine:
+    all = []
+
     def __init__(self, name, category):
         self.name = name
         self.category = category
+
+        Magazine.all.append(self)
 
     def __setattr__(self, key, value):
         if key == "name" or key == 'category':
@@ -70,4 +74,30 @@ class Magazine:
             return list(article_titles)
 
     def contributing_authors(self):
-        pass
+        authors_count = {}
+
+        for article in Article.all:
+            if article.magazine == self:
+                author = article.author
+                authors_count[author] = authors_count.get(author, 0) + 1
+
+        contributing_authors = [author for author, count in authors_count.items() if count > 2]
+
+        return contributing_authors if contributing_authors else None
+    
+    @classmethod
+    def top_publisher(cls):
+        if not hasattr(cls, "all") or not cls.all:
+            return None
+
+        top_magazine = None
+        max_articles = 0
+
+        for magazine in cls.all:
+            count = len([article for article in Article.all if article.magazine == magazine])
+
+            if count > max_articles:
+                max_articles = count
+                top_magazine = magazine
+
+        return top_magazine
