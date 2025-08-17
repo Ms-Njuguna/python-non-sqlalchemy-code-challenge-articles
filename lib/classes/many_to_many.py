@@ -62,10 +62,7 @@ class Magazine:
 
     def contributors(self):
         authors = [article.author for article in self.articles()]
-        if authors:
-            return list(authors)
-        else:
-            return None
+        return list(set(authors)) if authors else []
 
     def article_titles(self):
         pass
